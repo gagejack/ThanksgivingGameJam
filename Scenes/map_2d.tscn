@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl5e2gw3o4dtj"]
+
+[ext_resource type="Texture2D" uid="uid://crotjf1i7lxln" path="res://Assets/Pixel Art Top Down - Basic v1.2.2/Scene Overview.png" id="1_fd1i1"]
+
+[node name="Map2D" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_fd1i1")
