@@ -532,8 +532,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
-radius = 6.0
-height = 28.0
+radius = 5.0
+height = 10.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_cvnsp")
@@ -546,5 +546,5 @@ animation = &"IdleRight"
 frame_progress = 0.06875897
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1)
+position = Vector2(0, 5)
 shape = SubResource("CapsuleShape2D_6t5aa")
