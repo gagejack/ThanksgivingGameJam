@@ -1,12 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3yb8vx78gn1i"]
+[gd_scene load_steps=3 format=3 uid="uid://d3yb8vx78gn1i"]
 
 [ext_resource type="PackedScene" uid="uid://bge6hsidnaxic" path="res://Scenes/player.tscn" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://bl5e2gw3o4dtj" path="res://Scenes/map_2d.tscn" id="1_qxrlw"]
 
 [node name="Game" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_ebmjs")]
-position = Vector2(5, 23)
-
 [node name="Camera2D2" type="Camera2D" parent="."]
-position = Vector2(9, 22)
+position = Vector2(140, 23)
 zoom = Vector2(2, 2)
+
+[node name="Map2D" parent="." instance=ExtResource("1_qxrlw")]
+
+[node name="Player" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(140, 23)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D2")
