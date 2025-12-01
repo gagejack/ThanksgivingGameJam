@@ -11,7 +11,5 @@
 [node name="Player" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(140, 23)
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-
 [node name="orc" parent="." instance=ExtResource("3_wrm1d")]
 position = Vector2(-79, 1)

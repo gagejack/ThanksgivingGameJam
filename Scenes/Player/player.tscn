@@ -1,4 +1,4 @@
-[gd_scene load_steps=260 format=3 uid="uid://bge6hsidnaxic"]
+[gd_scene load_steps=261 format=3 uid="uid://bge6hsidnaxic"]
 
 [ext_resource type="Script" uid="uid://b5tf2fkue2nrj" path="res://Scenes/Player/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ba6hvqslyjuu3" path="res://Assets/Female Character/Idle/Normal/Idle_Down.png" id="2_fkybt"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://dn08dfbamarxw" path="res://Assets/Female Character/Walk/Normal/walk_Right_Down.png" id="23_ph33w"]
 [ext_resource type="Texture2D" uid="uid://dogc1uol342hr" path="res://Assets/Female Character/Walk/Normal/walk_Right_Up.png" id="24_7ldla"]
 [ext_resource type="PackedScene" uid="uid://b0qkapgyyqfyx" path="res://Scenes/Guns/pistol.tscn" id="25_qr1w5"]
+[ext_resource type="Texture2D" uid="uid://b3sbm3lceved2" path="res://Assets/Pixel UI pack 3/04.png" id="26_ythyg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_83xs0"]
 atlas = ExtResource("2_fkybt")
@@ -1802,17 +1803,18 @@ animations = [{
 radius = 5.0
 height = 10.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_mask = 0
 script = ExtResource("1_cvnsp")
 
 [node name="Gun2D" parent="." instance=ExtResource("25_qr1w5")]
 position = Vector2(-2, 1)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedPlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_cvnsp")
-animation = &"idleDown"
+animation = &"walkGunLeftDown"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -1820,3 +1822,56 @@ shape = SubResource("CapsuleShape2D_6t5aa")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
+
+[node name="HealthBar" type="Node2D" parent="."]
+position = Vector2(-415, 105)
+scale = Vector2(1.5, 1.5)
+
+[node name="Health100" type="Sprite2D" parent="HealthBar"]
+position = Vector2(126.00001, 1.3333349)
+scale = Vector2(1.0744681, 1.1666666)
+texture = ExtResource("26_ythyg")
+offset = Vector2(19, 0)
+region_enabled = true
+region_rect = Rect2(47.9805, 51.931854, 47.923004, 9.330147)
+
+[node name="Health80" type="Sprite2D" parent="HealthBar"]
+position = Vector2(146, 1.3333333)
+texture = ExtResource("26_ythyg")
+region_enabled = true
+region_rect = Rect2(96.32761, 49.811367, 48.347137, 13.571125)
+
+[node name="Health50" type="Sprite2D" parent="HealthBar"]
+position = Vector2(146, 1.3333333)
+texture = ExtResource("26_ythyg")
+region_enabled = true
+region_rect = Rect2(144.25064, 49.811367, 47.923035, 13.147022)
+
+[node name="Health30" type="Sprite2D" parent="HealthBar"]
+position = Vector2(146.66667, 2)
+texture = ExtResource("26_ythyg")
+region_enabled = true
+region_rect = Rect2(192.51901, 18.253124, 48.57846, 14.265102)
+
+[node name="Health20" type="Sprite2D" parent="HealthBar"]
+position = Vector2(145.33334, 2)
+texture = ExtResource("26_ythyg")
+region_enabled = true
+region_rect = Rect2(237.6478, 1.5066109, 52.164, 14.419323)
+
+[node name="Health10" type="Sprite2D" parent="HealthBar"]
+position = Vector2(145.33333, 1.3333333)
+texture = ExtResource("26_ythyg")
+region_enabled = true
+region_rect = Rect2(289.74506, 1.889286, 45.773468, 12.916645)
+
+[node name="Health0" type="Sprite2D" parent="HealthBar"]
+texture = ExtResource("26_ythyg")
+region_enabled = true
+
+[node name="Frame" type="Sprite2D" parent="HealthBar"]
+position = Vector2(125.33334, 2)
+texture = ExtResource("26_ythyg")
+offset = Vector2(20, -1)
+region_enabled = true
+region_rect = Rect2(0, 0, 49.252777, 15.883563)

@@ -1,9 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://coj0hnhb1f8s8"]
+[gd_scene load_steps=29 format=3 uid="uid://coj0hnhb1f8s8"]
 
 [ext_resource type="Texture2D" uid="uid://b5bqvjl8qj7du" path="res://Assets/Pixel Crawler/Entities/Mobs/Orc Crew/Orc/Death/Death-Sheet.png" id="1_6et41"]
 [ext_resource type="Script" uid="uid://b3olqn6rsu4dk" path="res://Scenes/Mobs/orc.gd" id="1_cwpwq"]
 [ext_resource type="Texture2D" uid="uid://ckafg1ykvrt2n" path="res://Assets/Pixel Crawler/Entities/Mobs/Orc Crew/Orc/Idle/Idle-Sheet.png" id="2_cwpwq"]
 [ext_resource type="Texture2D" uid="uid://cheixj33utjuj" path="res://Assets/Pixel Crawler/Entities/Mobs/Orc Crew/Orc/Run/Run-Sheet.png" id="3_7pxyq"]
+[ext_resource type="Texture2D" uid="uid://crmka7d4ejsdv" path="res://Assets/Pixel Crawler/Weapons/Wood/Wood.png" id="5_0lcoq"]
+[ext_resource type="Script" uid="uid://dtisqvonsbmeh" path="res://Scenes/Mobs/area_2d.gd" id="6_t2v4k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ecxu"]
 atlas = ExtResource("1_6et41")
@@ -135,18 +137,85 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_80lki"]
+radius = 4.4444447
+height = 35.55555
+
+[sub_resource type="Animation" id="Animation_t2v4k"]
+resource_name = "swing"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03333334, 0.19999999),
+"transitions": PackedFloat32Array(1, 3.2490087, 4.141059),
+"update": 0,
+"values": [0.0, 1.5515977050229586, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_80lki"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.18151425]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v5tni"]
+_data = {
+&"RESET": SubResource("Animation_80lki"),
+&"swing": SubResource("Animation_t2v4k")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ya65n"]
 radius = 7.0
 
-[node name="orc" type="CharacterBody2D"]
+[node name="Orc" type="CharacterBody2D"]
+collision_layer = 4
 script = ExtResource("1_cwpwq")
+speed = 35
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedOrc2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-1, -17)
 sprite_frames = SubResource("SpriteFrames_35afy")
 animation = &"run"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Weapon" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(9, 2.9999998)
+rotation = 0.18151425
+scale = Vector2(0.45000002, 0.45000002)
+texture = ExtResource("5_0lcoq")
+offset = Vector2(0, -13.333332)
+region_enabled = true
+region_rect = Rect2(0, 2.0700455, 15.579025, 46.65073)
+
+[node name="Area2D" type="Area2D" parent="Weapon"]
+collision_layer = 2
+script = ExtResource("6_t2v4k")
+
+[node name="SwordCollision" type="CollisionShape2D" parent="Weapon/Area2D"]
+position = Vector2(0, -13.333333)
+shape = SubResource("CapsuleShape2D_80lki")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_v5tni")
+}
+
+[node name="OrcCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1)
 shape = SubResource("CapsuleShape2D_ya65n")
+
+[connection signal="body_entered" from="Weapon/Area2D" to="Weapon/Area2D" method="_on_body_entered"]

@@ -7,7 +7,7 @@ func _ready():
 
 func _on_body_entered(body):
 	if body.has_method("set_bridge_collision"):
-		var flip_state = !body.on_highGround
-		body.set_bridge_collision(flip_state)
+		var newState = !body.on_highGround
+		body.set_bridge_collision(newState)
 		
-		print("bridge collision set to:", flip_state)
+		print("bridge collision set to:", newState)

@@ -2,16 +2,54 @@ extends CharacterBody2D
 
 # Movement variables
 @export var speed: float = 100.0
-@export var run_multiplier: float = 2.5
-@export var can_collide_with_bridges: bool = false
+var run_multiplier: float = 2.5
+var can_collide_with_bridges: bool = false
 
-@onready var anim_sprite = $AnimatedSprite2D
+@onready var Health100 = $HealthBar/Health100
+@onready var Health80  = $HealthBar/Health80
+@onready var Health50  = $HealthBar/Health50
+@onready var Health30  = $HealthBar/Health30
+@onready var Health20  = $HealthBar/Health20
+@onready var Health10  = $HealthBar/Health10
+
+
+@onready var playerHealth = 100
+@onready var maxHealth = 100
+
+var has_gun
+
+@onready var anim_sprite = $AnimatedPlayerSprite
 var last_direction = Vector2.DOWN  # Track the last direction faced
 
+func take_damage(damage):
+	playerHealth = max(playerHealth - damage, 0)
+	update_health_bar()
+
+func update_health_bar():
+	var ratio = (float(playerHealth) / float(maxHealth))
+	
+	Health100.visible = ratio >= 0.8
+	Health80.visible  = ratio >= 0.6 and ratio < 0.8
+	Health50.visible  = ratio >= 0.5 and ratio < 0.6
+	Health30.visible  = ratio >= 0.3 and ratio < 0.5
+	Health20.visible  = ratio >= 0.2 and ratio < 0.3
+	Health10.visible  = ratio < 0.2
+	if ratio <= 0:
+		Health10.visible = false
 
 
+func _ready():
+	Health100.visible = true
+	Health80.visible = false
+	Health50.visible = false
+	Health30.visible = false
+	Health20.visible = false
+	Health10.visible = false
+	
 func _physics_process(delta: float) -> void:
 	# Get input direction
+	print("Player Health: ", playerHealth)
+	
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_axis("Left", "Right")
 	input_vector.y = Input.get_axis("Up", "Down")
@@ -38,7 +76,7 @@ func _physics_process(delta: float) -> void:
 		# --- ONLY flip runRight to act as runLeft ---
 		if is_running and direction == "Right":
 			anim_sprite.flip_h = true
-			anim_sprite.play("runRight")
+			anim_sprite.play("runLeft")
 		else:
 			anim_sprite.flip_h = false
 			var anim_prefix = "run" if is_running else "walk"
