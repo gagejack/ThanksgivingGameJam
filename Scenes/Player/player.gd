@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 # Movement variables
-@export var speed: float = 100.0
-var run_multiplier: float = 2.5
+@export var speed: float = 50.0
+var run_multiplier: float = 2
 var can_collide_with_bridges: bool = false
 
 @onready var Health100 = $HealthBar/Health100
@@ -55,9 +55,13 @@ func update_health_bar():
 	Health10.visible  = ratio < 0.2
 	if ratio <= 0:
 		Health10.visible = false
+		
+	print("Player Health: ", playerHealth)
+
 
 
 func _ready():
+	set_bridge_collision(false)
 	Health100.visible = true
 	Health80.visible = false
 	Health50.visible = false
@@ -67,7 +71,6 @@ func _ready():
 	
 func _physics_process(delta: float) -> void:
 	# Get input direction
-	print("Player Health: ", playerHealth)
 	
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_axis("Left", "Right")
