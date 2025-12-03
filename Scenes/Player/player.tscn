@@ -1,4 +1,4 @@
-[gd_scene load_steps=261 format=3 uid="uid://bge6hsidnaxic"]
+[gd_scene load_steps=262 format=3 uid="uid://bge6hsidnaxic"]
 
 [ext_resource type="Script" uid="uid://b5tf2fkue2nrj" path="res://Scenes/Player/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ba6hvqslyjuu3" path="res://Assets/Female Character/Idle/Normal/Idle_Down.png" id="2_fkybt"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://dn08dfbamarxw" path="res://Assets/Female Character/Walk/Normal/walk_Right_Down.png" id="23_ph33w"]
 [ext_resource type="Texture2D" uid="uid://dogc1uol342hr" path="res://Assets/Female Character/Walk/Normal/walk_Right_Up.png" id="24_7ldla"]
 [ext_resource type="PackedScene" uid="uid://b0qkapgyyqfyx" path="res://Scenes/Guns/pistol.tscn" id="25_qr1w5"]
+[ext_resource type="Script" uid="uid://1r3hputetbae" path="res://Scenes/Player/camera_2d.gd" id="26_bmb2s"]
 [ext_resource type="Texture2D" uid="uid://b3sbm3lceved2" path="res://Assets/Pixel UI pack 3/04.png" id="26_ythyg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_83xs0"]
@@ -1822,6 +1823,7 @@ shape = SubResource("CapsuleShape2D_6t5aa")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
+script = ExtResource("26_bmb2s")
 
 [node name="HealthBar" type="Node2D" parent="."]
 position = Vector2(-415, 105)

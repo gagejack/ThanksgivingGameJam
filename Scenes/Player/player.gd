@@ -12,6 +12,8 @@ var can_collide_with_bridges: bool = false
 @onready var Health20  = $HealthBar/Health20
 @onready var Health10  = $HealthBar/Health10
 
+@onready var sprite = $AnimatedPlayerSprite
+
 
 @onready var playerHealth = 100
 @onready var maxHealth = 100
@@ -21,8 +23,25 @@ var has_gun
 @onready var anim_sprite = $AnimatedPlayerSprite
 var last_direction = Vector2.DOWN  # Track the last direction faced
 
+func shake_sprite(intensity: float, duration: float):
+	var original_position = sprite.position
+	var shake_timer = 0.0
+	
+	while shake_timer < duration:
+		sprite.position = original_position	 + Vector2(
+			randf_range(-intensity, intensity),
+			randf_range(-intensity, intensity)
+		)
+		shake_timer += get_process_delta_time()
+		await get_tree().process_frame
+	sprite.position = original_position
+	
+
+
 func take_damage(damage):
 	playerHealth = max(playerHealth - damage, 0)
+	$Camera2D.shake(2.0,0.1) # Shake camera when taking damage
+	shake_sprite(3.0,0.15) # Shake 3 pixels for 0.15 seconds
 	update_health_bar()
 
 func update_health_bar():
