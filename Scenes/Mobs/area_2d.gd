@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body):
 	if body.has_method("take_damage"):
-		body.take_damage(orc.attackDamage)
+		body.take_damage(orc.attackDamage) #body hit by attack takes the damage of orc.attackDamage
 		
 		print("Damge Taken:", orc.attackDamage)
 		print("New Health: ", body.playerHealth)

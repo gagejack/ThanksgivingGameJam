@@ -12203,10 +12203,10 @@ physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_sqvil")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgpt7"]
-size = Vector2(48, 12)
+size = Vector2(50, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1151"]
-size = Vector2(49, 10)
+size = Vector2(51.25, 1)
 
 [node name="MapNode" type="Node2D"]
 
@@ -12221,14 +12221,15 @@ tile_map_data = PackedByteArray("AAAHAPH/AAAtABcAAAAHAPL/AAAtABgAAAAHAPP/AAAtABk
 tile_set = SubResource("TileSet_d5nwf")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 8
 script = ExtResource("2_kpvte")
 
 [node name="LeftStairCheck" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1, -106)
+position = Vector2(-2, -108)
 shape = SubResource("RectangleShape2D_qgpt7")
 debug_color = Color(0.91005886, 0.17563519, 0.6005075, 0.41960785)
 
 [node name="RightStairCheck" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(223, 54)
+position = Vector2(222.375, 54)
 shape = SubResource("RectangleShape2D_a1151")
 debug_color = Color(0.88850343, 0.19065458, 0.6639725, 0.41960785)

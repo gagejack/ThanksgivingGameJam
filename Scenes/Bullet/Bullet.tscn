@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://du4m6ntby0pug"]
+
+[ext_resource type="Texture2D" uid="uid://c6eyxlbs0edyf" path="res://Assets/Fantasy Icons/Full Spritesheet/64x64.png" id="1_7u3a6"]
+[ext_resource type="Script" uid="uid://k6jip80vh6ah" path="res://Scenes/Bullet/bullet.gd" id="1_jy0d1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jy0d1"]
+radius = 2.0
+height = 10.0
+
+[node name="BulletNode" type="Node2D"]
+
+[node name="Bullet" type="Area2D" parent="."]
+texture_filter = 1
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_jy0d1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bullet"]
+scale = Vector2(0.108108126, 0.10810811)
+texture = ExtResource("1_7u3a6")
+region_enabled = true
+region_rect = Rect2(575.87244, 4111.8984, 66.4386, 37.25537)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_jy0d1")
